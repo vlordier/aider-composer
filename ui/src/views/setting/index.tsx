@@ -10,6 +10,7 @@ import { settingMap } from './config';
 import useSettingStore from '../../stores/useSettingStore.ts';
 import useExtensionStore from '../../stores/useExtensionStore';
 import * as Yup from 'yup';
+import isFunction from 'lodash/isFunction';
 
 const FormItemContainer = styled.div({
   boxSizing: 'border-box',
@@ -58,8 +59,13 @@ export default function Setting() {
     initialValues: setting,
     validationSchema: schema,
     onSubmit: async (values) => {
-      console.log(values);
-      await setSetting(values);
+      const model = settingMap[values.provider].model;
+      const v = { ...values };
+      if (isFunction(model)) {
+        v.model = model(v.model);
+      }
+      console.log(v);
+      await setSetting(v);
       setViewType('chat');
     },
   });

@@ -128,7 +128,7 @@ class VscodeReactView implements WebviewViewProvider {
       `connect-src https://* ${
         isProd
           ? `http://127.0.0.1:*`
-          : `ws://${localServerUrl} http://${localServerUrl} http://localhost:*  http://127.0.0.1:*`
+          : `ws://${localServerUrl} http://localhost:*  http://127.0.0.1:*`
       }`,
     ];
 
