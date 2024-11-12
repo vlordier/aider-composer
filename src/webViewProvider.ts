@@ -201,6 +201,9 @@ class VscodeReactView implements WebviewViewProvider {
           case 'get-global-state':
             promise = this.getGlobalState(data);
             break;
+          case 'delete-global-state':
+            promise = this.deleteGlobalState(data);
+            break;
           case 'set-workspace-state':
             promise = this.setWorkspaceState(data);
             break;
@@ -235,10 +238,6 @@ class VscodeReactView implements WebviewViewProvider {
     }
   }
 
-  private async setGlobalState(data: { key: string; value: any }) {
-    return this.context.globalState.update(data.key, data.value);
-  }
-
   private async setWorkspaceState(data: { key: string; value: any }) {
     return this.context.workspaceState.update(data.key, data.value);
   }
@@ -247,12 +246,20 @@ class VscodeReactView implements WebviewViewProvider {
     return this.context.workspaceState.update(data.key, undefined);
   }
 
+  private async getWorkspaceState(data: { key: string }) {
+    return this.context.workspaceState.get(data.key);
+  }
+
   private async getGlobalState(data: { key: string }) {
     return this.context.globalState.get(data.key);
   }
 
-  private async getWorkspaceState(data: { key: string }) {
-    return this.context.workspaceState.get(data.key);
+  private async setGlobalState(data: { key: string; value: any }) {
+    return this.context.globalState.update(data.key, data.value);
+  }
+
+  private async deleteGlobalState(data: { key: string }) {
+    return this.context.globalState.update(data.key, undefined);
   }
 
   private async showErrorMessage(data: { message: string }) {

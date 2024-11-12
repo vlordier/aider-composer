@@ -41,6 +41,10 @@ export function getGlobalState(data: { key: string }) {
   return callCommand('get-global-state', data);
 }
 
+export function deleteGlobalState(data: { key: string }) {
+  return callCommand('delete-global-state', data);
+}
+
 export function setWorkspaceState(data: { key: string; value: unknown }) {
   return callCommand('set-workspace-state', data);
 }

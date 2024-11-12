@@ -1,7 +1,10 @@
 import { createJSONStorage, StateStorage } from 'zustand/middleware';
 import {
+  deleteGlobalState,
   deleteWorkspaceState,
+  getGlobalState,
   getWorkspaceState,
+  setGlobalState,
   setWorkspaceState,
 } from '../commandApi';
 
@@ -18,3 +21,17 @@ const vscodeStorage: StateStorage = {
 };
 
 export const persistStorage = createJSONStorage(() => vscodeStorage);
+
+const globalStorage: StateStorage = {
+  getItem: (key: string) => {
+    return getGlobalState({ key });
+  },
+  setItem: (key: string, value: string) => {
+    return setGlobalState({ key, value });
+  },
+  removeItem: (key: string) => {
+    return deleteGlobalState({ key });
+  },
+};
+
+export const persistGlobalStorage = createJSONStorage(() => globalStorage);
