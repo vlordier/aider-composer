@@ -1,0 +1,7 @@
+node_modules
+dist-ui/
+out/
+__pycache__
+.aider*
+.idea/
+*.vsix

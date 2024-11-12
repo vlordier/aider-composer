@@ -1,0 +1,94 @@
+html,
+body {
+  background: transparent;
+  height: 100%;
+  padding: 0;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+  line-height: 2;
+}
+
+button,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+*:focus-visible {
+  outline: none;
+}
+
+#root {
+  height: 100%;
+}
+
+svg {
+  max-width: 100%;
+  color: var(--vscode-editor-foreground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*
+Use vscode native scrollbar styles
+https://github.com/cline/cline/blob/3761023b60b26412d4e397470c15a23bf4bd0afe/webview-ui/src/index.css#L10
+https://github.com/gitkraken/vscode-gitlens/blob/b1d71d4844523e8b2ef16f9e007068e91f46fd88/src/webviews/apps/home/home.scss
+*/
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.scrollable,
+.scrollable,
+body.code-block-scrollable,
+.code-block-scrollable {
+  border-color: transparent;
+  transition: border-color 0.7s linear;
+}
+
+body:hover.scrollable,
+body:hover .scrollable,
+body:focus-within.scrollable,
+body:focus-within .scrollable,
+body:hover.code-block-scrollable,
+body:hover .code-block-scrollable,
+body:focus-within.code-block-scrollable,
+body:focus-within .code-block-scrollable {
+  border-color: var(--vscode-scrollbarSlider-background);
+  transition: none;
+}
+
+.scrollable::-webkit-scrollbar-corner {
+  background-color: transparent !important;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-color: inherit;
+  border-right-style: inset;
+  border-right-width: calc(100vw + 100vh);
+  border-radius: unset !important;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  border-color: var(--vscode-scrollbarSlider-hoverBackground);
+}
+
+.scrollable::-webkit-scrollbar-thumb:active {
+  border-color: var(--vscode-scrollbarSlider-activeBackground);
+}
+/*
+Fix VSCode ignoring webkit scrollbar modifiers
+https://github.com/microsoft/vscode/issues/213045
+*/
+@supports selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: unset;
+  }
+}

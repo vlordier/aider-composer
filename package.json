@@ -1,0 +1,168 @@
+{
+  "name": "aider-composer",
+  "publisher": "lee2py",
+  "displayName": "Aider Composer",
+  "description": "Seamless integration of Aider with VSCode",
+  "version": "0.0.1",
+  "icon": "resources/icon.png",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lee88688/aider-composer"
+  },
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aider-composer-activitybar",
+          "title": "Aider Composer",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "aider-composer-activitybar": [
+        {
+          "type": "webview",
+          "id": "aider-composer.SidebarProvider",
+          "name": "Aider Composer",
+          "when": "aider-composer.Started"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "aider-composer.AddButtonClick",
+        "title": "New",
+        "icon": "$(add)"
+      },
+      {
+        "command": "aider-composer.SettingButtonClick",
+        "title": "Settings",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "aider-composer.ConfirmModify",
+        "title": "Confirm Modify",
+        "icon": "$(check)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "aider-composer.AddButtonClick",
+          "when": "view == aider-composer.SidebarProvider",
+          "group": "navigation@1"
+        },
+        {
+          "command": "aider-composer.SettingButtonClick",
+          "when": "view == aider-composer.SidebarProvider",
+          "group": "navigation@2"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "aider-composer.ConfirmModify",
+          "group": "navigation@1",
+          "when": "isInDiffEditor && resourceScheme =~ /^(aider-diff|file)$/"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Aider Composer",
+      "properties": {
+        "aider-composer.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Python path which python executable is in and aider-chat package is installed"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "cross-env NODE_ENV=development && tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "build-ui": "npm run build --prefix ui",
+    "dev-ui": "npm run dev --prefix ui"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^3.2.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.9.1",
+    "prettier": "^3.3.3",
+    "semantic-release": "^24.2.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "nanoid": "^3.3.7"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false,
+          "tarballDir": false
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "package-lock.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "npx vsce package"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "*.vsix",
+              "label": "Extension Package"
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}

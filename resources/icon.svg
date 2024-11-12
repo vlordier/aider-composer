@@ -1,0 +1,80 @@
+<svg viewBox="20 20 50 50" xmlns="http://www.w3.org/2000/svg">
+    <!-- background circle -->
+    <!-- <circle cx="50" cy="50" r="48" fill="url(#gradient)" /> -->
+
+    <!-- Enhanced neural network background -->
+    <g stroke="rgba(255,255,255,0.4)">
+        <!-- Main connection lines -->
+        <line x1="16" y1="26" x2="76" y2="66" strokeWidth="0.5" />
+        <line x1="16" y1="66" x2="76" y2="26" strokeWidth="0.5" />
+        <line x1="46" y1="16" x2="46" y2="76" strokeWidth="0.5" />
+        <line x1="26" y1="16" x2="66" y2="76" strokeWidth="0.3" />
+        <line x1="26" y1="76" x2="66" y2="16" strokeWidth="0.3" />
+
+        <!-- Additional connection lines -->
+        <line x1="16" y1="46" x2="76" y2="46" strokeWidth="0.2" />
+        <line x1="31" y1="16" x2="31" y2="76" strokeWidth="0.2" />
+        <line x1="65" y1="16" x2="65" y2="76" strokeWidth="0.2" />
+
+        <!-- Main nodes -->
+        <circle cx="16" cy="26" r="2.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="16" cy="66" r="2.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="46" cy="16" r="2.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="46" cy="76" r="2.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="76" cy="26" r="2.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="76" cy="66" r="2.5" fill="rgba(255,255,255,0.8)" />
+
+        <!-- Additional nodes -->
+        <circle cx="31" cy="16" r="1.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="31" cy="76" r="1.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="65" cy="16" r="1.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="65" cy="76" r="1.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="16" cy="46" r="1.5" fill="rgba(255,255,255,0.8)" />
+        <circle cx="76" cy="46" r="1.5" fill="rgba(255,255,255,0.8)" />
+
+        <!-- animation dots -->
+        <!-- <circle cx="38" cy="38" r="0.8" fill="rgba(255,255,255,0.9)">
+            <animate attributeName="cx" from="16" to="76" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="cy" from="26" to="66" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="58" cy="58" r="0.8" fill="rgba(255,255,255,0.9)">
+            <animate attributeName="cx" from="76" to="16" dur="4s" repeatCount="indefinite" />
+            <animate attributeName="cy" from="66" to="26" dur="4s" repeatCount="indefinite" />
+        </circle> -->
+    </g>
+
+    <!-- pixel "a" -->
+    <g transform="translate(30, 10) scale(0.3, 0.4)">
+        <!-- line 1 -->
+        <rect x="20" y="40" width="20" height="20" fill="white" />
+        <rect x="40" y="40" width="20" height="20" fill="white" />
+        <rect x="60" y="40" width="20" height="20" fill="white" />
+
+        <!-- line 2 -->
+        <rect x="80" y="60" width="20" height="20" fill="white" />
+
+        <!-- line 3 -->
+        <rect x="20" y="80" width="20" height="20" fill="white" />
+        <rect x="40" y="80" width="20" height="20" fill="white" />
+        <rect x="60" y="80" width="20" height="20" fill="white" />
+        <rect x="80" y="80" width="20" height="20" fill="white" />
+
+        <!-- line 4 -->
+        <rect x="0" y="100" width="20" height="20" fill="white" />
+        <rect x="80" y="100" width="20" height="20" fill="white" />
+
+        <!-- line 5 -->
+        <rect x="20" y="120" width="20" height="20" fill="white" />
+        <rect x="40" y="120" width="20" height="20" fill="white" />
+        <rect x="60" y="120" width="20" height="20" fill="white" />
+        <rect x="100" y="120" width="20" height="20" fill="white" />
+    </g>
+
+    <!-- Gradient definition -->
+    <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1a1a2e" />
+            <stop offset="100%" stopColor="#16213e" />
+        </linearGradient>
+    </defs>
+</svg>
