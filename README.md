@@ -2,6 +2,8 @@
 
 Aider Composer is a VSCode extension that allows you to integrate [Aider](https://github.com/Aider-AI/aider) into your development workflow. this extension is highly inspired by [cursor](https://www.cursor.com/) and [cline](https://github.com/cline/cline).
 
+![demo](./resources/demo.gif)
+
 ## Features
 
 - easily add and drop file.
