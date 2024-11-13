@@ -8,7 +8,7 @@ It is very recommended to read [Requirements](#requirements) and [Extension Sett
 
 ## Features
 
-- easily add and drop file.
+- easily add and drop file, and toggle between read-only and editable modes with just a click.
 - most of the chat mode is supported, including `ask` `diff` `diff-fenced` `udiff` `whole`, and you can easily switch between them.
 - review code changes before applying them.
 - HTTP Proxy is supported, use VSCode settings `http.proxy` to configure and don't support authentication.
