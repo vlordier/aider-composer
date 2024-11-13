@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/lee88688/aider-composer/compare/v1.0.2...v1.1.0) (2024-11-13)
+
+
+### Features
+
+* add session history ([#1](https://github.com/lee88688/aider-composer/issues/1)) ([3336972](https://github.com/lee88688/aider-composer/commit/333697289a7b3037ed71137b73577a49b4149c55))
+
 ## [1.0.2](https://github.com/lee88688/aider-composer/compare/v1.0.1...v1.0.2) (2024-11-12)
 
 
