@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/lee88688/aider-composer/compare/v1.1.1...v1.1.2) (2024-11-14)
+
+
+### Bug Fixes
+
+* API Key Configuration Handling for OpenAI-Compatible APIs ([#8](https://github.com/lee88688/aider-composer/issues/8)) ([8e49767](https://github.com/lee88688/aider-composer/commit/8e49767aa7a3665fa03cf418a9833a048a490ebc))
+
 ## [1.1.1](https://github.com/lee88688/aider-composer/compare/v1.1.0...v1.1.1) (2024-11-14)
 
 
