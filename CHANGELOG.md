@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/lee88688/aider-composer/compare/v1.1.3...v1.1.4) (2024-11-14)
+
+
+### Bug Fixes
+
+* when multiple search block, only last will be apply. ([7d14cf2](https://github.com/lee88688/aider-composer/commit/7d14cf2600e0095866f3201928edcb3174656408))
+
 ## [1.1.3](https://github.com/lee88688/aider-composer/compare/v1.1.2...v1.1.3) (2024-11-14)
 
 
