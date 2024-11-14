@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/lee88688/aider-composer/compare/v1.1.2...v1.1.3) (2024-11-14)
+
+
+### Bug Fixes
+
+* openai compatible setting would not work correctly ([#10](https://github.com/lee88688/aider-composer/issues/10)) ([340ec5a](https://github.com/lee88688/aider-composer/commit/340ec5a3e34ea32ba95290efb6df982d002d5504))
+
 ## [1.1.2](https://github.com/lee88688/aider-composer/compare/v1.1.1...v1.1.2) (2024-11-14)
 
 
