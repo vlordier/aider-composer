@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/lee88688/aider-composer/compare/v1.1.0...v1.1.1) (2024-11-14)
+
+
+### Bug Fixes
+
+* give more instructions in install ([44b43d3](https://github.com/lee88688/aider-composer/commit/44b43d3ae4ae2e08fd6e20d4cc7d94ba09ec607f))
+
 # [1.1.0](https://github.com/lee88688/aider-composer/compare/v1.0.2...v1.1.0) (2024-11-13)
 
 
