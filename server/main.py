@@ -68,6 +68,12 @@ class CaptureIO(InputOutput):
     def write_text(self, filename, content):
         print(f'write {filename}')
         self.write_files[filename] = content
+    
+    def read_text(self, filename):
+        print(f'read {filename}')
+        if filename in self.write_files:
+            return self.write_files[filename]
+        return super().read_text(filename)
 
     def get_captured_write_files(self):
         write_files = self.write_files
