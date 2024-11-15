@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/lee88688/aider-composer/compare/v1.1.4...v1.1.5) (2024-11-15)
+
+
+### Bug Fixes
+
+* multiple edits write fail ([#14](https://github.com/lee88688/aider-composer/issues/14)) ([2781530](https://github.com/lee88688/aider-composer/commit/27815301856adeb8454388e1eeee46eab37ce9d8))
+
 ## [1.1.4](https://github.com/lee88688/aider-composer/compare/v1.1.3...v1.1.4) (2024-11-14)
 
 
