@@ -354,12 +354,17 @@ class VscodeReactView implements WebviewViewProvider {
       });
 
       const name = path.basename(data.path);
-      // 打开 diff 编辑器
+
+      // open diff editor
       await vscode.commands.executeCommand(
         'vscode.diff',
         originalUri,
         modifiedUri,
         `${name} ${isNewFile ? 'Created' : 'Modified'}`,
+        {
+          viewColumn: vscode.ViewColumn.Two,
+          preview: false,
+        },
       );
     } catch (error) {
       this.outputChannel.error(`Error opening diff: ${error}`);
