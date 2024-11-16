@@ -158,7 +158,8 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "npx vsce package"
+          "prepareCmd": "npx vsce package",
+          "publishCmd": "npx vsce publish"
         }
       ],
       [

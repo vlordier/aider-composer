@@ -37,8 +37,8 @@ jobs:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
         run: npx semantic-release
 
-      - name: Publish to VS Code Marketplace
-        if: ${{ success() }}
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
-        run: npx vsce publish -p $VSCE_PAT
+      # - name: Publish to VS Code Marketplace
+      #   if: ${{ success() }}
+      #   env:
+      #     VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      #   run: npx vsce publish -p $VSCE_PAT
