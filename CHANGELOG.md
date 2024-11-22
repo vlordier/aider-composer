@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/lee88688/aider-composer/compare/v1.2.0...v1.3.0) (2024-11-22)
+
+
+### Bug Fixes
+
+* compile error ([7f800b7](https://github.com/lee88688/aider-composer/commit/7f800b7be040f2fc7e1d5928561e51ab7bf58875))
+
+
+### Features
+
+* inline diff preview ([#17](https://github.com/lee88688/aider-composer/issues/17)) ([ee23dc3](https://github.com/lee88688/aider-composer/commit/ee23dc3edacd15bbda7dd3a63d2bfab831f28f1d))
+
 # [1.2.0](https://github.com/lee88688/aider-composer/compare/v1.1.5...v1.2.0) (2024-11-21)
 
 
