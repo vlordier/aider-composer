@@ -10,7 +10,7 @@ It is highly recommended to read the [Requirements](#requirements) and [Extensio
 
 - Easily add and remove files, and toggle between read-only and editable modes with just a click
 - Most chat modes are supported, including `ask`, `diff`, `diff-fenced`, `udiff`, and `whole`, and you can easily switch between them
-- Review code changes before applying them
+- Review code changes before applying them, support both inline diff preview and diff editor preview (default).
 - Chat history sessions are supported
 - HTTP Proxy is supported (uses VSCode's `http.proxy` setting, authentication not supported)
 
