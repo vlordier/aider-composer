@@ -21,6 +21,20 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "keybindings": [
+      {
+        "command": "aider-composer.AcceptAllChanges",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a",
+        "when": "aider-composer.hasChanges"
+      },
+      {
+        "command": "aider-composer.RejectAllChanges",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "when": "aider-composer.hasChanges"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -47,6 +61,18 @@
         "icon": "$(add)"
       },
       {
+        "command": "aider-composer.AcceptAllChanges",
+        "title": "Accept All Changes",
+        "icon": "$(check-all)",
+        "enablement": "aider-composer.hasChanges"
+      },
+      {
+        "command": "aider-composer.RejectAllChanges",
+        "title": "Reject All Changes",
+        "icon": "$(close-all)",
+        "enablement": "aider-composer.hasChanges"
+      },
+      {
         "command": "aider-composer.SettingButtonClick",
         "title": "Settings",
         "icon": "$(settings-gear)"
@@ -60,6 +86,30 @@
         "command": "aider-composer.HistoryButtonClick",
         "title": "History",
         "icon": "$(history)"
+      },
+      {
+        "command": "aider-composer.AcceptChange",
+        "title": "Accept Change",
+        "icon": "$(check)"
+      },
+      {
+        "command": "aider-composer.RejectChange",
+        "title": "Reject Change",
+        "icon": "$(x)"
+      },
+      {
+        "command": "aider-composer.Test",
+        "title": "aider composer test"
+      },
+      {
+        "command": "aider-composer.AcceptAllChanges",
+        "title": "Accept All Changes",
+        "icon": "$(check-all)"
+      },
+      {
+        "command": "aider-composer.RejectAllChanges",
+        "title": "Reject All Changes",
+        "icon": "$(close-all)"
       }
     ],
     "menus": {
@@ -85,6 +135,16 @@
           "command": "aider-composer.ConfirmModify",
           "group": "navigation@1",
           "when": "isInDiffEditor && resourceScheme == 'aider-diff'"
+        },
+        {
+          "command": "aider-composer.AcceptAllChanges",
+          "group": "navigation@2",
+          "when": "aider-composer.hasChanges"
+        },
+        {
+          "command": "aider-composer.RejectAllChanges",
+          "group": "navigation@3",
+          "when": "aider-composer.hasChanges"
         }
       ]
     },
@@ -95,6 +155,11 @@
           "type": "string",
           "default": "",
           "description": "Python path which python executable is in and aider-chat package is installed"
+        },
+        "aider-composer.inlineDiff.enable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable inline diff in the editor(preview), restart vscode after changing"
         }
       }
     }
@@ -113,6 +178,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@types/diff": "^6.0.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
     "@types/vscode": "^1.93.0",
@@ -128,6 +194,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "diff": "^7.0.0",
     "nanoid": "^3.3.7"
   },
   "release": {
