@@ -94,22 +94,33 @@ export class InlineDiffViewManager
       this._onDidChangeCodeLenses,
 
       // accept command
-      vscode.commands.registerCommand('aider-composer.AcceptChange', () => {
-        const uri = vscode.window.activeTextEditor?.document.uri;
-        if (!uri) {
-          return;
-        }
-        this.acceptChange(uri.toString());
-      }),
+      vscode.commands.registerCommand(
+        'aider-composer.AcceptChange',
+        (uriStr: string, i: number) => {
+          if (typeof uriStr !== 'string') {
+            const uri = vscode.window.activeTextEditor?.document.uri;
+            if (!uri) {
+              return;
+            }
+            uriStr = uri.toString();
+          }
+          this.acceptChange(uriStr, i);
+        },
+      ),
 
       // reject command
-      vscode.commands.registerCommand('aider-composer.RejectChange', () => {
-        const uri = vscode.window.activeTextEditor?.document.uri;
-        if (!uri) {
-          return;
-        }
-        this.rejectChange(uri.toString());
-      }),
+      vscode.commands.registerCommand(
+        'aider-composer.RejectChange',
+        (uriStr: string, i: number) => {
+          if (typeof uriStr !== 'string') {
+            const uri = vscode.window.activeTextEditor?.document.uri;
+            if (!uri) {
+              return;
+            }
+          }
+          this.rejectChange(uriStr, i);
+        },
+      ),
 
       // accept all command
       vscode.commands.registerCommand(
