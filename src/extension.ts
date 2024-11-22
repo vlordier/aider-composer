@@ -7,6 +7,7 @@ import { InlineDiffViewManager } from './diffView/InlineDiff';
 import { DiffEditorViewManager } from './diffView/diffEditor';
 import { isProductionMode } from './utils/isProductionMode';
 import { DiffViewManager } from './diffView';
+import GenerateCodeManager from './generateCode/generateCodeManager';
 
 let outputChannel: vscode.LogOutputChannel;
 
@@ -40,6 +41,10 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(diffEditorDiffManager);
     diffViewManager = diffEditorDiffManager;
   }
+
+  // generate code manager
+  const generateCodeManager = new GenerateCodeManager(outputChannel);
+  context.subscriptions.push(generateCodeManager);
 
   // webview provider
   const webviewProvider = new VscodeReactView(
