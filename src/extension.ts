@@ -137,7 +137,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         const content = await fsPromises.readFile('', 'utf-8');
 
-        inlineDiffViewManager.openDiffView({
+        diffViewManager.openDiffView({
           path: '',
           content: content,
         });
