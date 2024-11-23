@@ -1,3 +1,17 @@
+## [1.3.2](https://github.com/lee88688/aider-composer/compare/v1.3.1...v1.3.2) (2024-11-23)
+
+
+### Bug Fixes
+
+* accept and reject error ([c426196](https://github.com/lee88688/aider-composer/commit/c42619685c45223ddd3081a9160f94c168483085))
+
+## [1.3.1](https://github.com/lee88688/aider-composer/compare/v1.3.0...v1.3.1) (2024-11-23)
+
+
+### Bug Fixes
+
+* ollama model setting need a prefix ([5d6d1a2](https://github.com/lee88688/aider-composer/commit/5d6d1a2182c752a5f826ab6e2d4eec837a1741c6))
+
 # [1.3.0](https://github.com/lee88688/aider-composer/compare/v1.2.0...v1.3.0) (2024-11-22)
 
 

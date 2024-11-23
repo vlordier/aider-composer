@@ -20,7 +20,7 @@ export const settingMap: Record<string, SettingMapItem> = {
     hasBaseUrl: false,
   },
   ollama: {
-    model: null,
+    model: (model) => `ollama/${model}`,
     hasBaseUrl: true,
   },
   openrouter: {
