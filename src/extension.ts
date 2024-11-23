@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import * as fsPromises from 'fs/promises';
 import VscodeReactView from './webViewProvider';
-import { DiffContentProviderId } from './types';
 import AiderChatService from './aiderChatService';
 import { InlineDiffViewManager } from './diffView/InlineDiff';
 import { DiffEditorViewManager } from './diffView/diffEditor';

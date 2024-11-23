@@ -13,7 +13,6 @@ import * as path from 'path';
 import fsPromise from 'fs/promises';
 import { getUri } from './utils/getUri';
 import { getNonce } from './utils/getNonce';
-import { DiffContentProviderId, DiffParams } from './types';
 import { isProductionMode } from './utils/isProductionMode';
 import { DiffViewManager } from './diffView';
 
