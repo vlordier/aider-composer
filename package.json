@@ -189,6 +189,7 @@
     "@vscode/vsce": "^3.2.1",
     "cross-env": "^7.0.3",
     "eslint": "^9.9.1",
+    "ovsx": "^0.10.1",
     "prettier": "^3.3.3",
     "semantic-release": "^24.2.0",
     "typescript": "^5.5.4"
@@ -227,6 +228,12 @@
         {
           "prepareCmd": "npx vsce package",
           "publishCmd": "npx vsce publish"
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "npx ovsx publish"
         }
       ],
       [
