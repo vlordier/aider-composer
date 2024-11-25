@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/lee88688/aider-composer/compare/v1.3.3...v1.3.4) (2024-11-25)
+
+
+### Bug Fixes
+
+* add support to open vsx ([02a49b6](https://github.com/lee88688/aider-composer/commit/02a49b6c156dfa7c0b3a6b863232caacca3be01a))
+
 ## [1.3.3](https://github.com/lee88688/aider-composer/compare/v1.3.2...v1.3.3) (2024-11-25)
 
 
