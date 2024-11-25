@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/lee88688/aider-composer/compare/v1.3.2...v1.3.3) (2024-11-25)
+
+
+### Bug Fixes
+
+* inline diff preview bugs ([#33](https://github.com/lee88688/aider-composer/issues/33)) ([e91623d](https://github.com/lee88688/aider-composer/commit/e91623dfa396cd48c48254805248c7d40e865160))
+
 ## [1.3.2](https://github.com/lee88688/aider-composer/compare/v1.3.1...v1.3.2) (2024-11-23)
 
 
