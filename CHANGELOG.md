@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/lee88688/aider-composer/compare/v1.3.4...v1.3.5) (2024-11-26)
+
+
+### Bug Fixes
+
+* ovsx publish failed ([#36](https://github.com/lee88688/aider-composer/issues/36)) ([1c25383](https://github.com/lee88688/aider-composer/commit/1c25383d5ea67e2ddca376cc29da7745e2bc7a67))
+
 ## [1.3.4](https://github.com/lee88688/aider-composer/compare/v1.3.3...v1.3.4) (2024-11-25)
 
 
