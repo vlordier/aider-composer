@@ -99,7 +99,7 @@ export function activate(context: vscode.ExtensionContext) {
       'aider-composer.Started',
       true,
     );
-    webviewProvider.serverStarted(`http://127.0.0.1:${aiderChatService.port}`);
+    webviewProvider.serverStarted(`http://127.0.0.1:${aiderChatService.getPort()}`);
     const activeEditor = vscode.window.activeTextEditor;
     if (activeEditor) {
       webviewProvider.currentEditorChanged(activeEditor);

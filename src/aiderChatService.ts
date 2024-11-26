@@ -43,6 +43,10 @@ export default class AiderChatService {
     private outputChannel: vscode.LogOutputChannel,
   ) { }
 
+  public getPort(): number {
+    return this.port;
+  }
+
   /**
    * Starts the Aider chat service
    * @returns Promise that resolves when service is started
@@ -94,24 +98,38 @@ export default class AiderChatService {
    * @throws AiderServiceError if configuration is invalid
    */
   private async validateConfiguration(): Promise<void> {
-    const config = vscode.workspace.getConfiguration('aider-composer') as AiderConfig;
+    const config = vscode.workspace.getConfiguration('aider-composer');
+    const configuredPythonPath = config.get<string>('pythonPath');
+    this.log('info', `Configured Python path from settings: ${configuredPythonPath}`);
 
     // Try to get Python path from VS Code Python extension first
     const currentPythonPath = this.getCurrentPythonPath();
-    let pythonPath: string;
+    this.log('info', `Python path from VS Code Python extension: ${currentPythonPath}`);
 
+    let pythonPath: string;
     if (currentPythonPath) {
       pythonPath = currentPythonPath;
+      this.log('info', `Using Python path from VS Code extension: ${pythonPath}`);
+
       // Update the settings with current Python path
       await config.update('pythonPath', path.dirname(currentPythonPath), vscode.ConfigurationTarget.Global);
-      this.log('info', `Updated Python path to: ${currentPythonPath}`);
+      this.log('info', `Updated aider-composer.pythonPath setting to: ${path.dirname(currentPythonPath)}`);
     } else {
-      pythonPath = this.resolvePythonPath(config.pythonPath);
+      // If no Python path from VS Code extension, try configured path or default system Python
+      pythonPath = this.resolvePythonPath(configuredPythonPath || '');
+      if (!pythonPath) {
+        // Try system Python as last resort
+        pythonPath = process.platform === 'win32' ? 'python.exe' : 'python';
+        this.log('info', `Falling back to system Python: ${pythonPath}`);
+      }
     }
 
     if (!pythonPath) {
+      this.log('error', 'Python path is empty or invalid');
       throw new AiderServiceError('Python path is not configured');
     }
+
+    this.log('info', `Final Python path being used: ${pythonPath}`);
 
     try {
       await fsPromise.access(pythonPath, fsPromise.constants.X_OK);
@@ -433,12 +451,27 @@ export default class AiderChatService {
    * Resolves the Python executable path
    */
   private resolvePythonPath(configPath: string): string {
+    if (!configPath) {
+      this.log('warn', 'Configured Python path is empty, will try system Python');
+      return '';
+    }
+
+    this.log('info', `Resolving Python path from config: ${configPath}`);
     const pythonExecutable = process.platform === 'win32' ? 'python.exe' : 'python';
-    const pythonPath = path.join(
-      configPath,
-      pythonExecutable
-    );
-    this.log('info', `Resolved Python path: ${pythonPath}`);
-    return pythonPath;
+    const pythonPath = path.join(configPath, pythonExecutable);
+    this.log('info', `Constructed Python path: ${pythonPath}`);
+
+    try {
+      const stats = fsPromise.statSync(pythonPath);
+      if (stats.isFile()) {
+        this.log('info', `Verified Python path exists: ${pythonPath}`);
+        return pythonPath;
+      }
+      this.log('warn', `Resolved path is not a file: ${pythonPath}`);
+    } catch (error) {
+      this.log('warn', `Could not access Python path: ${pythonPath}`, error);
+    }
+
+    return '';
   }
 }
