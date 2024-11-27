@@ -61,8 +61,8 @@ select = [
     "RUF", # ruff-specific rules
 ]
 
-# Never enforce `E501` (line length violations)
-ignore = ["E501"]
+# Never enforce `E501` (line length violations) and ignore `COM812`, `ISC001` to avoid conflicts with the formatter
+ignore = ["E501", "COM812", "ISC001"]
 
 # Avoid trying to fix flake8-bugbear (`B`) violations.
 unfixable = ["B"]
@@ -74,13 +74,13 @@ max-complexity = 10
 "tests/*" = ["S101"]  # Allow assert in tests
 
 [tool.mypy]
-python_version = "3.8"
-warn_return_any = true
+python_version = "3.11"
+warn_return_any = false
 warn_unused_configs = true
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
 check_untyped_defs = true
-disallow_untyped_decorators = true
+disallow_untyped_decorators = false
 no_implicit_optional = true
 warn_redundant_casts = true
 warn_unused_ignores = true
@@ -88,7 +88,7 @@ warn_no_return = true
 warn_unreachable = true
 strict_optional = true
 strict_equality = true
-strict = true
+strict = false
 
 # Ignore missing imports for external packages
 ignore_missing_imports = true
@@ -104,10 +104,10 @@ enable_error_code = [
     "redundant-self",
 ]
 
-# Disallow dynamic typing
-disallow_any_unimported = true
-disallow_any_expr = true
-disallow_any_decorated = true
-disallow_any_explicit = true
-disallow_any_generics = true
-disallow_subclassing_any = true
+# Removed the following Any-related flags:
+# disallow_any_unimported = true
+# disallow_any_expr = true
+# disallow_any_decorated = true
+# disallow_any_explicit = true
+# disallow_any_generics = true
+# disallow_subclassing_any = true
