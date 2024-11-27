@@ -83,6 +83,7 @@ testpaths = [
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+asyncio_default_fixture_loop_scope = "function"  # Added to fix deprecation warning
 
 [tool.coverage.run]
 source = ["aider_composer"]  # Updated to match the actual package name
@@ -137,3 +138,9 @@ enable_error_code = [
 # disallow_any_explicit = true
 # disallow_any_generics = true
 # disallow_subclassing_any = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = false

@@ -137,7 +137,7 @@ class ChatSessionManager:
         coder.pretty = False
 
         self.coder = coder
-        self.chat_type = "ask"
+        self.chat_type = "ask"  # type: ChatModeType
         self.diff_format = "diff"
         self.reference_list = []
 
@@ -163,7 +163,9 @@ class ChatSessionManager:
         self.coder = self.coder.create(
             from_coder=self.coder,
             edit_format=self.chat_type if self.chat_type == "ask" else self.diff_format,
-            fnames=tuple(item.fs_path for item in self.reference_list if not item.readonly),
+            fnames=tuple(
+                item.fs_path for item in self.reference_list if not item.readonly
+            ),
             read_only_fnames=tuple(
                 item.fs_path for item in self.reference_list if item.readonly
             ),
@@ -180,7 +182,9 @@ class ChatSessionManager:
 
     def _handle_error_lines(self, error_lines: List[str]) -> Iterator[ChatChunkData]:
         """Handle error lines and yield appropriate chat chunks"""
-        if error_lines and any(error_lines):  # Only yield if there are non-empty error lines
+        if error_lines and any(
+            error_lines
+        ):  # Only yield if there are non-empty error lines
             yield ChatChunkData(event="error", data={"error": "\n".join(error_lines)})
         return iter(())  # Return empty iterator
 
@@ -204,7 +208,9 @@ class ChatSessionManager:
 
         if data.chat_type != self.chat_type or data.diff_format != self.diff_format:
             need_update_coder = True
-            self.chat_type = data.chat_type
+            if data.chat_type not in ("ask", "code"):
+                raise ValueError("chat_type must be either 'ask' or 'code'")
+            self.chat_type = data.chat_type  # type: ChatModeType
             self.diff_format = data.diff_format
         if data.reference_list != self.reference_list:
             need_update_coder = True
