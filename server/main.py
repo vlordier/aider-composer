@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request, Response
 from aider.models import Model
 from aider.coders import Coder
 from aider.io import InputOutput
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 import os
 import json
 from threading import Event

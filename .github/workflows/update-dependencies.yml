@@ -1,0 +1,41 @@
+name: Update Dependencies
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # Run weekly on Mondays at 00:00 UTC
+  workflow_dispatch:  # Allow manual triggers
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      - name: Install pip-tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-tools
+
+      - name: Update dependencies
+        run: |
+          pip-compile --upgrade requirements.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update/dependencies
+          title: "chore: update python dependencies"
+          commit-message: "chore: update python dependencies"
+          body: |
+            Update Python dependencies to their latest versions.
+          labels: dependencies
