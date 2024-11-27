@@ -160,11 +160,11 @@ class ChatSessionManager:
             self.coder = Coder.create(from_coder=self.coder, main_model=model)
 
     def update_coder(self) -> None:
-        self.coder = Coder.create(
+        self.coder = self.coder.create(
             from_coder=self.coder,
             edit_format=self.chat_type if self.chat_type == "ask" else self.diff_format,
-            fnames=(item.fs_path for item in self.reference_list if not item.readonly),
-            read_only_fnames=(
+            fnames=tuple(item.fs_path for item in self.reference_list if not item.readonly),
+            read_only_fnames=tuple(
                 item.fs_path for item in self.reference_list if item.readonly
             ),
         )
@@ -180,8 +180,8 @@ class ChatSessionManager:
 
     def _handle_error_lines(self, error_lines: List[str]) -> Iterator[ChatChunkData]:
         """Handle error lines and yield appropriate chat chunks"""
-        if error_lines:
-            raise RuntimeError("\n".join(error_lines))
+        if error_lines and any(error_lines):  # Only yield if there are non-empty error lines
+            yield ChatChunkData(event="error", data={"error": "\n".join(error_lines)})
         return iter(())  # Return empty iterator
 
     def _handle_reflection(self) -> Optional[str]:
@@ -204,7 +204,7 @@ class ChatSessionManager:
 
         if data.chat_type != self.chat_type or data.diff_format != self.diff_format:
             need_update_coder = True
-            self.chat_type = "ask" if data.chat_type == "ask" else "code"
+            self.chat_type = data.chat_type
             self.diff_format = data.diff_format
         if data.reference_list != self.reference_list:
             need_update_coder = True
@@ -218,19 +218,18 @@ class ChatSessionManager:
             message = data.message
 
             while message:
-                yield from self._process_message(message)
+                for chunk in self._process_message(message):
+                    yield chunk
                 error_lines = self.coder.io.get_captured_error_lines()
-
-                try:
-                    yield from self._handle_error_lines(error_lines)
-                except RuntimeError as e:
-                    yield ChatChunkData(event="error", data={"error": str(e)})
-                    return
+                for chunk in self._handle_error_lines(error_lines):
+                    yield chunk
 
                 next_message = self._handle_reflection()
                 message = next_message if next_message is not None else ""
                 if message:
                     yield ChatChunkData(event="reflected", data={"message": message})
+                    for chunk in self._process_message(message):
+                        yield chunk
 
             write_files = self.io.get_captured_write_files()
             if write_files:
