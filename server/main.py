@@ -2,6 +2,7 @@ import json
 import logging
 from typing import Iterator
 
+# Flask imports for REST API functionality
 from flask import Flask, Response, jsonify, request
 
 from server.chat_session_manager import chat_session_manager as manager
@@ -20,12 +21,19 @@ app = Flask(__name__)
 CORS(app)
 
 
-API_BASE = "/api/chat"
-API_HEALTH = "/api/health"
+# Base API endpoints
+API_BASE = "/api/chat"  # Endpoint for chat-related operations
+API_HEALTH = "/api/health"  # Health check endpoint
 
 
 @app.route(f"{API_BASE}", methods=["POST", "OPTIONS"])
 def sse() -> Response:
+    """Server-Sent Events endpoint for streaming chat responses
+
+    Handles both the OPTIONS preflight request and the main POST request
+    that initiates the SSE stream. Converts incoming JSON data into
+    ChatSessionData objects and streams responses as SSE events.
+    """
     if request.method == "OPTIONS":
         return Response()
 
@@ -49,15 +57,25 @@ def sse() -> Response:
 
 @app.route(f"{API_BASE}", methods=["DELETE"])
 def clear() -> Response:
-    manager.coder.done_messages.clear()
-    manager.coder.cur_messages.clear()
+    """Clear chat history
+
+    Clears both completed and current messages from the chat session.
+    Returns empty JSON response.
+    """
+    manager.coder.done_messages.clear()  # Clear completed messages
+    manager.coder.cur_messages.clear()  # Clear current messages
     return jsonify({})
 
 
 @app.route(f"{API_BASE}/session", methods=["PUT"])
 def set_history() -> Response:
-    manager.coder.done_messages = request.json
-    manager.coder.cur_messages.clear()
+    """Update chat session history
+
+    Replaces existing chat history with provided messages and
+    clears current messages. Used for restoring previous sessions.
+    """
+    manager.coder.done_messages = request.json  # Set completed messages
+    manager.coder.cur_messages.clear()  # Clear current messages
     return jsonify({})
 
 

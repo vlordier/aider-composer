@@ -38,9 +38,15 @@ ChatModeType = Literal["ask", "code"]
 
 
 class CaptureIO(InputOutput):
-    lines: List[str]
-    error_lines: List[str]
-    write_files: Dict[str, str]
+    """IO handler that captures output for the chat session
+
+    Captures regular output, errors, and file writes to be sent
+    back to the client. Extends aider's InputOutput class.
+    """
+
+    lines: List[str]  # Regular output lines
+    error_lines: List[str]  # Error messages
+    write_files: Dict[str, str]  # Files to be written {path: content}
 
     def __init__(
         self,
@@ -109,11 +115,17 @@ class CaptureIO(InputOutput):
 
 
 class ChatSessionManager:
-    chat_type: ChatModeType
-    diff_format: str
-    reference_list: List[ChatSessionReference]
-    setting: Optional[ChatSetting] = None
-    confirm_ask_result: Optional[Any] = None
+    """Manages chat sessions and coordinates with the AI coder
+
+    Handles chat session state, model configuration, and coordinates
+    between the web API and the underlying AI coder implementation.
+    """
+
+    chat_type: ChatModeType  # Current chat mode (ask/code)
+    diff_format: str  # How to format code diffs
+    reference_list: List[ChatSessionReference]  # Files in current session
+    setting: Optional[ChatSetting] = None  # Model/provider settings
+    confirm_ask_result: Optional[Any] = None  # Result of confirmation prompts
 
     def __init__(self) -> None:
         model = Model("gpt-4o")
@@ -172,7 +184,17 @@ class ChatSessionManager:
         )
 
     def _process_message(self, message: str) -> Iterator[ChatChunkData]:
-        """Process a single message and yield chat chunks"""
+        """Process a single message and yield chat chunks
+
+        Takes a message string, runs it through the coder, and yields
+        ChatChunkData containing response chunks. Also handles usage reporting.
+
+        Args:
+            message: The input message to process
+
+        Yields:
+            ChatChunkData containing response chunks and usage info
+        """
         self.coder.reflected_message = None
         for msg in self.coder.run_stream(message):
             yield ChatChunkData(event="data", data={"chunk": msg})
@@ -203,6 +225,17 @@ class ChatSessionManager:
         return self.coder.reflected_message
 
     def _update_chat_settings(self, data: ChatSessionData) -> bool:
+        """Update chat session settings if they have changed
+
+        Compares incoming settings with current settings and updates if different.
+        Updates chat type, diff format, and reference list.
+
+        Args:
+            data: New chat session settings
+
+        Returns:
+            bool: True if any settings were updated, False otherwise
+        """
         need_update = False
         if data.chat_type != self.chat_type or data.diff_format != self.diff_format:
             self.chat_type = cast(ChatModeType, data.chat_type)
