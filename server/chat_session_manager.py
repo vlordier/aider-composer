@@ -1,7 +1,7 @@
 import logging
 import os
 from threading import Event
-from typing import Any, Dict, Iterator, List, Literal, Optional
+from typing import Any, Dict, Iterator, List, Literal, Optional, cast
 
 from aider.coders import Coder
 from aider.io import InputOutput
@@ -202,40 +202,39 @@ class ChatSessionManager:
         self.coder.num_reflections += 1
         return self.coder.reflected_message
 
+    def _update_chat_settings(self, data: ChatSessionData) -> bool:
+        need_update = False
+        if data.chat_type != self.chat_type or data.diff_format != self.diff_format:
+            self.chat_type = cast(ChatModeType, data.chat_type)
+            self.diff_format = data.diff_format
+            need_update = True
+        if data.reference_list != self.reference_list:
+            self.reference_list = data.reference_list
+            need_update = True
+        return need_update
+
+    def _process_message_loop(self, message: str) -> Iterator[ChatChunkData]:
+        while message:
+            for chunk in self._process_message(message):
+                yield chunk
+            error_lines = self.coder.io.get_captured_error_lines()
+            for chunk in self._handle_error_lines(error_lines):
+                yield chunk
+
+            next_message = self._handle_reflection()
+            message = next_message if next_message is not None else ""
+            if message:
+                yield ChatChunkData(event="reflected", data={"message": message})
+
     def chat(self, data: ChatSessionData) -> Iterator[ChatChunkData]:
-        need_update_coder = False
         data.reference_list.sort(key=lambda x: x.fs_path)
 
-        if data.chat_type != self.chat_type or data.diff_format != self.diff_format:
-            need_update_coder = True
-            if data.chat_type not in ("ask", "code"):
-                raise ValueError("chat_type must be either 'ask' or 'code'")
-            self.chat_type = data.chat_type  # type: ChatModeType
-            self.diff_format = data.diff_format
-        if data.reference_list != self.reference_list:
-            need_update_coder = True
-            self.reference_list = data.reference_list
-
-        if need_update_coder:
+        if self._update_chat_settings(data):
             self.update_coder()
 
         try:
             self.coder.init_before_message()
-            message = data.message
-
-            while message:
-                for chunk in self._process_message(message):
-                    yield chunk
-                error_lines = self.coder.io.get_captured_error_lines()
-                for chunk in self._handle_error_lines(error_lines):
-                    yield chunk
-
-                next_message = self._handle_reflection()
-                message = next_message if next_message is not None else ""
-                if message:
-                    yield ChatChunkData(event="reflected", data={"message": message})
-                    for chunk in self._process_message(message):
-                        yield chunk
+            yield from self._process_message_loop(data.message)
 
             write_files = self.io.get_captured_write_files()
             if write_files:
