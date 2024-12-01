@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/lee88688/aider-composer/compare/v1.4.0...v1.4.1) (2024-12-01)
+
+
+### Bug Fixes
+
+* use display text as session title ([4eda6b6](https://github.com/lee88688/aider-composer/commit/4eda6b6a22b91e247d474f2bb999128cfd44d1c1))
+
 # [1.4.0](https://github.com/lee88688/aider-composer/compare/v1.3.5...v1.4.0) (2024-12-01)
 
 
