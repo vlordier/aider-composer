@@ -94,7 +94,7 @@ export const useChatSessionStore = create(
               };
             }
 
-            const title = data[0].text;
+            const title = data[0].type === 'user' ? data[0].displayText.trim() : data[0].text.trim();
             return {
               ...state,
               sessions: [
