@@ -10,7 +10,7 @@ It is highly recommended to read the [Requirements](#requirements) and [Extensio
 
 - [Generate Code Mode](#generate-code)
   ![generate-code](./resources/generate-code.gif)
-- Add Code Snippet to Chat
+- [Add Code Snippet to Chat](#add-code-snippet)
 - Add [Inline Diff Preview](#inline-diff-preview)
 
 ## Features
