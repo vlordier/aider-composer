@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/lee88688/aider-composer/compare/v1.3.5...v1.4.0) (2024-12-01)
+
+
+### Features
+
+* generate code mode and add snippet to chat ([#40](https://github.com/lee88688/aider-composer/issues/40)) ([6bf1636](https://github.com/lee88688/aider-composer/commit/6bf16367511f3745d0b80926c0a549055b979ff7))
+
 ## [1.3.5](https://github.com/lee88688/aider-composer/compare/v1.3.4...v1.3.5) (2024-11-26)
 
 
