@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/lee88688/aider-composer/compare/v1.4.1...v1.5.0) (2024-12-05)
+
+
+### Features
+
+* multiple models support ([#41](https://github.com/lee88688/aider-composer/issues/41)) ([54a2097](https://github.com/lee88688/aider-composer/commit/54a2097cf2bb9b210c37fa950b0aacce403637e3))
+
 ## [1.4.1](https://github.com/lee88688/aider-composer/compare/v1.4.0...v1.4.1) (2024-12-01)
 
 
